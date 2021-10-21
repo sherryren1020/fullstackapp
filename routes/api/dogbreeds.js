@@ -31,16 +31,17 @@ router.post('/', function(req, res) {
 
   });
 
-router.put('/', function(req, res) {
-    res.send('songs put');
+router.put('/:id', function(req, res) {
+    // res.send('songs put');
 
-    dogbreed.findOneAndUpdate(req.body,(err,updateDog)=>{
-      if(err) {return res.status(400).send()}
+    dogbreed.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,updateDog)=>{
+      if(err) return res.status(400).send()
+      if(!updateDog) return res.status(404).send('No found')
       res.status(201).send(updateDog)
     })
   });
 
-router.delete('/', function(req, res) {
+router.delete('/:id', function(req, res) {
     // res.send('songs delete');
 
     dogbreed.findByIdAndDelete(req.params.id,(err,deleteDog)=>{
@@ -48,6 +49,7 @@ router.delete('/', function(req, res) {
         if (!deleteDog) {
           return res.status(404).send()
         }
+        res.status(204).send('data deleted')
     })
 
   });

@@ -13,6 +13,7 @@ var dogbreedsRouter = require('./dogbreeds')
 router.use('/dogbreeds',dogbreedsRouter)
 
 router.get('/', function(req, res) {
+  res.header('x-mycustom-header',"hello from my heaher")
   res.send('api ');
 });
 

@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv=require('dotenv')
+var helmet=require('helmet')
 dotenv.config()
 
 mongoose.connect(process.env.MONGODB_LOCATION)
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet())
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);

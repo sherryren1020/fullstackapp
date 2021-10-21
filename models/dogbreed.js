@@ -7,6 +7,9 @@ const breedsSchema = new Schema({
     Temperament:[String],
     image:String
 
+},
+{
+    collection: 'breeds'
 });
 
 const Dogbreeds  = mongoose.model('Dogbreeds', breedsSchema);
