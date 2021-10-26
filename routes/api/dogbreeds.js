@@ -1,7 +1,9 @@
+const { query } = require('express');
 var express = require('express');
 const app = require('../../app')
 var router = express.Router();
 var dogbreed = require('../../models/dogbreed')
+let validation = require('../../models/validation_dog')
 
 router.get('/', function(req, res) {
     // res.send('songs all');
@@ -22,24 +24,56 @@ router.get('/:id', function(req, res) {
     })
   });
 
-router.post('/', function(req, res) {
-    // res.send('songs post');
-    dogbreed.create(req.body,(err,saveDog)=>{
-      if(err) {return res.status(400).send()}
-      res.status(201).send(saveDog)
-    })
-
+router.post('/', function(req, res,next) {
+  
+      validation.create(req.body,(err)=>{
+        // console.log(req.body)
+        // console.log(err)
+        if (err === null) {
+          return res.status(201).send({ success: req.body });
+        }
+        
+         return res.status(400).send({ error: err.message });
+      })
+      
+    
+    
   });
+
+
+
+    // dogbreed.create(req.body,(err,saveDog)=>{
+    //   dogbreed.validate((error)=>{
+    //     console.log(error)
+    //   })
+    //   if(err) {return res.status(400).send()}
+    //   res.status(201).send(saveDog)
+    // })
+    ;
 
 router.put('/:id', function(req, res) {
     // res.send('songs put');
-
-    dogbreed.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,updateDog)=>{
-      if(err) return res.status(400).send()
-      if(!updateDog) return res.status(404).send('No found')
-      res.status(201).send(updateDog)
+    validation.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators: true}, (err, result) => {
+      if (err !== null){
+        res.status(400).send(err)
+      }
+      res.status(201).send(result)
     })
+    // ,(err,updateDog)=>{
+    //   // console.log(req.body)
+    //   // console.log(err)
+    //   console.log(updateDog)
+    //   if(!updateDog) {return res.status(404).send('No found')}
+    //   console.log(err)
+    //   if(err === null){
+    //     return res.status(201).send({ success: req.body });
+    //   }
+    //   return res.status(400).send({ error: err.message });
+       
+    // }
+    
   });
+
 
 router.delete('/:id', function(req, res) {
     // res.send('songs delete');

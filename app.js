@@ -7,19 +7,14 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv=require('dotenv')
 var helmet=require('helmet')
+// var validateToken = require('./middleware/validateToken')
 dotenv.config()
 
 mongoose.connect(process.env.MONGODB_LOCATION)
 
 
-
-
-
-
-
-
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+//  var usersRouter = require('./routes/api/users');
 var apiRouter = require('./routes/api');
 // var songsRouter = require('./routes/api/songs')
 
@@ -35,6 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet())
+// app.use(validateToken)
+
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
