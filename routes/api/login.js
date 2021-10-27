@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
     })
   });
 router.get('/:id', validateToken,function(req, res) {
-    res.send('songs all');
+    res.send();
 
     // Song.find({},(err,data)=>{
     //   if(err) return res.status(400).send('Error')
@@ -26,23 +26,28 @@ router.post('/', function(req, res,next) {
         if (err!==null) {
             res.status(400).send(err.message)
         }
-        user.comparePassword(req.body.password,(err, isMatch)=>{
-            if (err) throw err;
-            if (isMatch){
-                res.append(
-                    'x-auth-token',
-                    jwt.sign(
-                        {
-                            data: JSON.stringify(user),
-                            exp: Math.floor(Date.now()/1000) + (60*60)
-                        },
-                        process.env.JWT_SECRET_KEY
-                        )
-                ).status(200).send()
-            }else{
-                res.status(400).send("Incorrect email or password")
-            }   
-        })
+        if (user){
+            user.comparePassword(req.body.password,(err, isMatch)=>{
+                if (err) throw err;
+                if (isMatch){
+                    res.append(
+                        'x-auth-token',
+                        jwt.sign(
+                            {
+                                data: JSON.stringify(user),
+                                // exp: Math.floor(Date.now()/1000) + (60*60)
+                            },
+                            process.env.JWT_SECRET_KEY
+                            )
+                    ).status(200).send()
+                }else{
+                    res.status(400).send("Incorrect email or password")
+                }   
+            })
+        }else{
+            res.status(200).send("user not exist!")
+        }
+       
     })
     })
 
