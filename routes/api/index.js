@@ -4,17 +4,14 @@ var router = express.Router();
 // var validateToken = require('../../middleware/validateToken')
 
 
-var songsRouter = require('./songs')
-router.use('/songs',songsRouter)
+// var songsRouter = require('./songs')
+// router.use('/songs',songsRouter)
 
 var usersRouter = require('./users')
 router.use('/users',usersRouter)
 
-var registerRouter = require('./register')
-router.use('/users/register',registerRouter)
-
-var loginRouter = require('./login')
-router.use('/users/login',loginRouter)
+// var registerRouter = require('./register')
+// router.use('/users',registerRouter)
 
 var dogbreedsRouter = require('./dogbreeds')
 router.use('/dogbreeds',dogbreedsRouter)

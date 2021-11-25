@@ -21,7 +21,7 @@ router.get('/:id', validateToken,function(req, res) {
     // })
   });
 
-router.post('/', function(req, res,next) {
+router.post('/',function(req, res,next) {
     userModel.findOne({email: req.body.email}, (err, user) => {
         if (err!==null) {
             res.status(400).send(err.message)
@@ -51,6 +51,6 @@ router.post('/', function(req, res,next) {
     })
     })
 
-
+        
 
 module.exports = router;

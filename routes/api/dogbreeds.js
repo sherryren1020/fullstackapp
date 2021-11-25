@@ -4,6 +4,7 @@ const app = require('../../app')
 var router = express.Router();
 var dogbreed = require('../../models/dogbreed')
 let validation = require('../../models/validation_dog')
+let usersValidation = require('../../models/users')
 
 router.get('/', function(req, res) {
     // res.send('songs all');
@@ -26,7 +27,7 @@ router.get('/:id', function(req, res) {
 
 router.post('/', function(req, res,next) {
   
-      validation.create(req.body,(err)=>{
+      usersValidation.create(req.body,(err)=>{
         // console.log(req.body)
         // console.log(err)
         if (err === null) {
@@ -42,35 +43,18 @@ router.post('/', function(req, res,next) {
 
 
 
-    // dogbreed.create(req.body,(err,saveDog)=>{
-    //   dogbreed.validate((error)=>{
-    //     console.log(error)
-    //   })
-    //   if(err) {return res.status(400).send()}
-    //   res.status(201).send(saveDog)
-    // })
+  
     ;
 
 router.put('/:id', function(req, res) {
     // res.send('songs put');
-    validation.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators: true}, (err, result) => {
+   usersValidation.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators: true}, (err, result) => {
       if (err !== null){
         res.status(400).send(err)
       }
       res.status(201).send(result)
     })
-    // ,(err,updateDog)=>{
-    //   // console.log(req.body)
-    //   // console.log(err)
-    //   console.log(updateDog)
-    //   if(!updateDog) {return res.status(404).send('No found')}
-    //   console.log(err)
-    //   if(err === null){
-    //     return res.status(201).send({ success: req.body });
-    //   }
-    //   return res.status(400).send({ error: err.message });
-       
-    // }
+   
     
   });
 
@@ -78,7 +62,7 @@ router.put('/:id', function(req, res) {
 router.delete('/:id', function(req, res) {
     // res.send('songs delete');
 
-    dogbreed.findByIdAndDelete(req.params.id,(err,deleteDog)=>{
+    usersValidation.findByIdAndDelete(req.params.id,(err,deleteDog)=>{
       if(err) return res.status(400).send('Error')
         if (!deleteDog) {
           return res.status(404).send()

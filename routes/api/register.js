@@ -5,15 +5,15 @@ let usersValidation = require('../../models/users')
 
 
 
-router.get('/', function(req, res) {
-  usersValidation.find({},(err,data)=>{
+router.get('/register', function(req, res) {
+  // usersValidation.find({},(err,data)=>{
     if(err) return res.status(400).send('Error')
     res.send(data)
-  })
+  // })
 
   });
 
-router.get('/:id', function(req, res) {
+router.get('/register:id', function(req, res) {
     // res.send('songs get id');
 
     usersValidation.findById(req.params.id,(err,user)=>{
@@ -23,12 +23,13 @@ router.get('/:id', function(req, res) {
     })
   });
 
-router.post('/', function(req, res,next) {
+router.post('/register', function(req, res,next) {
   
   usersValidation.create(req.body,(err, created)=>{
         // console.log(req.body)
         // console.log(err)
         if (err === null) {
+          
           return res.status(201).send(created);
         }
         
@@ -41,7 +42,7 @@ router.post('/', function(req, res,next) {
 
     ;
 
-router.put('/:id', function(req, res) {
+router.put('/register:id', function(req, res) {
     // res.send('songs put');
     usersValidation.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators: true}, (err, result) => {
       if (err !== null){
@@ -54,7 +55,7 @@ router.put('/:id', function(req, res) {
   });
 
 
-router.delete('/:id', function(req, res) {
+router.delete('/register:id', function(req, res) {
     // res.send('songs delete');
 
     usersValidation.findByIdAndDelete(req.params.id,(err,deleteUser)=>{
