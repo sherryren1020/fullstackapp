@@ -3,6 +3,7 @@ import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
 import Axios from 'axios';
 import { Card } from './Card';
+// import {ProtectedRoute} from "./protected.route"
 
 class Main extends React.Component {
   state = {

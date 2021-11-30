@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon bin/www",
-    "api": "npm start",
+    "start": "node ./bin/www",
+    "api": "nodemon ./bin/www",
     "frontend": "cd client && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm start\" \"cd client && npm start\""
   },
