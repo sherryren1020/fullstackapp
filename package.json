@@ -19,6 +19,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.14",
     "morgan": "~1.9.1",
     "react-router-dom": "^5.3.0"
   },
