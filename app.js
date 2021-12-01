@@ -11,13 +11,7 @@ var cors = require('cors')
 // var validateToken = require('./middleware/validateToken')
 dotenv.config()
 
-mongoose.connect(process.env.MONGODB_LOCATION,{
-  useNewUrlParser:true,
-  useUnifiedTopology:true
-}
-.then(()=>console.log('connnected to mongoDB'))
-.catch(err=>console.log(err))
-)
+mongoose.connect(process.env.MONGODB_LOCATION)
 
 
 var indexRouter = require('./routes/index');
@@ -35,7 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 app.use(helmet())
 // app.use(validateToken)
