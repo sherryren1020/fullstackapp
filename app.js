@@ -11,7 +11,13 @@ var cors = require('cors')
 // var validateToken = require('./middleware/validateToken')
 dotenv.config()
 
-mongoose.connect(process.env.MONGODB_LOCATION)
+mongoose.connect(process.env.MONGODB_LOCATION,{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+}
+.then(()=>console.log('connnected to mongoDB'))
+.catch(err=>console.log(err))
+)
 
 
 var indexRouter = require('./routes/index');
