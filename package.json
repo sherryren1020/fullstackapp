@@ -6,8 +6,9 @@
     "start": "node ./bin/www",
     "api": "nodemon ./bin/www",
     "frontend": "cd client && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm start\" \"cd client && npm start\""
-  },
+    "dev": "concurrently --kill-others-on-fail \"npm start\" \"cd client && npm start\"",
+  "heroku-postbuild":"cd client && npm install && npm run build"  
+},
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
