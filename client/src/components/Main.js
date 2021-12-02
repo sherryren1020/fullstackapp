@@ -18,7 +18,8 @@ class Main extends React.Component {
 
   }
   componentDidMount() {
-    Axios.get('http://localhost:5000/api/dogbreeds')
+    // Axios.get('http://localhost:5000/api/dogbreeds')
+    Axios.get(`${process.env.REACT_APP_API_ROOT_URL}/dogbreeds`)
       .then(response => {
         this.setState({
           dogBreeds: response.data
