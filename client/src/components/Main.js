@@ -1,30 +1,21 @@
 import React from 'react';
 import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
-import Axios from 'axios';
+import dataService from '../services/dataService';
 import { Card } from './Card';
 // import {ProtectedRoute} from "./protected.route"
 
 class Main extends React.Component {
   state = {
-    dogBreeds: [],
-    // breedName:[],
-    // breedId:[],
-    // lifeExpectancy:[],
-    // Temperament:[],
-    // image:[]
-
-
-
+    dogBreeds: []
   }
   componentDidMount() {
     // Axios.get('http://localhost:5000/api/dogbreeds')
-    Axios.get(`${process.env.REACT_APP_API_ROOT_URL}/dogbreeds`)
-      .then(response => {
-        this.setState({
-          dogBreeds: response.data
-        })
-      })
+    dataService.getData((err,dogBreeds)=>{
+      if(err) return console.log(err)
+      this.setState({dogBreeds:dogBreeds})
+    })
+    
   }
 
   render() {

@@ -6,11 +6,12 @@ let usersValidation = require('../../models/users')
 var jwt = require('jsonwebtoken')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send(res.body);
+router.get('/', function(req, res) {
+  
+  res.send('res.body ');
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', function(req, res) {
   res.send(res.body);
 });
 

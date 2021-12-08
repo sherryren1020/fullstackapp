@@ -1,8 +1,8 @@
 import React from 'react';
 import '../css/signin.css';
-import Axios from 'axios';
 import NavBar from './NavBar';
 import  { Redirect,useHistory } from 'react-router-dom'
+import authService from '../services/authService'
 
 
 class Register extends React.Component {
@@ -19,16 +19,14 @@ class Register extends React.Component {
 
     handleSubmit=(e)=>{
         e.preventDefault();
-
-        Axios.post(`${process.env.REACT_APP_API_ROOT_URL}/users/register`, this.state)
-        .then(response => {
-            console.log(response)
-        localStorage.setItem('token',response.headers['x-auth-token'])
-        //    return <NavBar name={this.state.firtName} />
-        this.props.history.push('/')
+        authService.register(this.state,(err,success)=>{
+            if(!success){
+                console.log(err)
+            }
+            this.props.history.push('/')
         })
-        .catch( error => console.log(error.response))
 
+       
     }
     handleChange =(e)=>{
         this.setState({
