@@ -24,10 +24,7 @@ class authService {
         .then(response => {
             
             localStorage.setItem('token',response.headers['x-auth-token'])
-
-            //redirect when someone logged in
-        //    this.props.history.push('/')
-           callback(null,true)
+            callback(null,true)
         })
         .catch( error => {
             console.log(error.response)
@@ -37,10 +34,11 @@ class authService {
         this.authenticated = true
        
     }
-    logout(cb){
+    logout(){
         localStorage.removeItem('token')
-        this.authenticated =false
-        cb()
+        window.location.href = '/';
+        // this.authenticated =false
+       
     }
 
     isAuthenticated(){

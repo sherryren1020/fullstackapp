@@ -1,59 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
+import { BrowserRouter as Router, 
+    Link} from 'react-router-dom';
+
 
 function Card(props) {
-    return (
-        <div>
-            <section className="jumbotron text-center">
-                <div className="container">
-                    <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Search this site" />
-                        <div className="input-group-append">
-                            <button className="btn btn-secondary" type="button">
-                                <i className="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <div className="album py-5 bg-light">
-                <div className="container">
-                    <div className="row">
-                        {   
-                            props.data.map((dog, i)=>{
-                                return (
-                                    <div className="col-md-4" key={i}>
-                                        <div className="card mb-4 box-shadow">
+    return (             
+                                        <div className="card box-shadow col-md-4" key={props.key}>
                                             <img
                                                 className="card-img-top"
                                                 // data-src={"dog_img"}
                                                 style={{ height: 225, width: '100%', display: 'block' }}
-                                                src={dog.image}
-                                                alt={dog.breedName}
+                                                src={props.dog.image}
+                                                alt={props.dog.breedName}
                                                 data-holder-rendered="true" />
                                             <div className="card-body">
-                                                <p className="card-text">{dog.breedName}</p>
+                                                <p className="card-text">{props.dog.breedName}</p>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group">
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">Delete</button>
+                                                        {/* <button type="button" className="btn btn-sm btn-outline-secondary">View</button> */}
+                                                        <button type="button" className="btn btn-sm btn-outline-secondary"><Link to={'/edit/'+props.dog._id} dogId={props.dog._id}>Edit</Link></button>
+                                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => props.dogDelete(props.dog._id)}>Delete</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+                                   
+                        
+          
     )
-}
 
+}
+    
 
 export { Card };

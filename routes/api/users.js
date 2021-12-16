@@ -29,7 +29,7 @@ router.post('/login',function(req, res,next) {
                       'x-auth-token',
                       jwt.sign(
                           {
-                              data: JSON.stringify(user),
+                              data: JSON.stringify(user.email),
                               // exp: Math.floor(Date.now()/1000) + (60*60)
                           },
                           process.env.JWT_SECRET_KEY
@@ -42,7 +42,7 @@ router.post('/login',function(req, res,next) {
               }   
           })
       }else{
-          res.status(200).send("user not exist!")
+          res.status(401).send("user not exist!")
       }
      
   })
